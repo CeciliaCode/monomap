@@ -16,6 +16,7 @@ This project provides a fully functional RESTful API for managing Monkeypox case
   - [Step 2: Restart the Application](#step-2-restart-the-application)
 - [Running the Application](#running-the-application)
 - [Testing the API Using Postman](#testing-the-api-using-postman)
+- [Testing MongoDB with MongoDB Compass (Docker Setup)](#testing-mongodb-with-mongodb-compass)
 - [CI/CD Pipeline personalization](#ci-cd-pipeline-personalization)
   - [Step 1: Update Docker Compose File](#step-1-update-docker-compose-file)
   - [Step 2: Personalize the Database Name](#step-2-personalize-the-database-name)
@@ -49,10 +50,15 @@ This project provides a fully functional RESTful API for managing Monkeypox case
 
 ## Prerequisites
 
+**Basic:**
+
 - **Docker Desktop**: Make sure Docker Desktop is installed. You can download and install it from [here](https://www.docker.com/products/docker-desktop).
-- **MongoDB Compass**: Install MongoDB Compass for a visual interface to interact with MongoDB. [Download MongoDB Compass](https://www.mongodb.com/try/download/compass).
-- **Node.js**: Ensure Node.js is installed if you want to develop locally. [Download Node.js](https://nodejs.org/).
 - **Postman**: Install Postman to test the API endpoints. You can download it from [here](https://www.postman.com/downloads/).
+
+**Complementary:**
+
+- **MongoDB Compass**: Install MongoDB Compass if you wish a visual interface to interact with MongoDB. [Download MongoDB Compass](https://www.mongodb.com/try/download/compass).
+- **Node.js**: Ensure Node.js is installed if you want to develop locally. [Download Node.js](https://nodejs.org/). 
 
 ## Setup and Basic, Quickstart Personalization
 
@@ -191,6 +197,38 @@ You can use **MongoDB Compass** to visually inspect and interact with the databa
 
 ---
 
+## Testing MongoDB with MongoDB Compass
+
+1. **Open MongoDB Compass**.
+
+2. **Connect to MongoDB** using the connection string configured for Docker. Use the `MONGO_URL_DOCKER` value specified in your `.env` file. A common example would be:
+
+   ```plaintext
+   mongodb://root:example@mongo:27017/
+   ```
+
+   Ensure that:
+   - `root` is the username.
+   - `example` is the password.
+   - `mongo` is the hostname of the MongoDB service defined in your `docker-compose.yml` file.
+   - `27017` is the default MongoDB port.
+
+3. **Click "Connect"**: After entering the connection string, click the "Connect" button to establish a connection with your Dockerized MongoDB instance.
+
+4. **Browse the Database**:
+   - Once connected, you will see a list of available databases inside the Dockerized MongoDB instance.
+   - Select the database used by your application (e.g., `monomap`).
+
+5. **View Collections**:
+   - Explore the collections within the database, such as those storing Monkeypox case data.
+   - Click on the collection name to view documents, and use the built-in query interface to filter or search specific records.
+
+6. **Inspect and Manage Data**:
+   - View, edit, or delete documents directly from MongoDB Compass to validate that your API is correctly interacting with the database.
+   - For example, run a query to find all Monkeypox cases or filter data based on certain criteria, such as by `age` or `location`.
+
+---
+
 ## CI/CD Pipeline personalization
 
 The project uses GitHub Actions for CI/CD, automatically building and pushing Docker images to Docker Hub on every push to the main branch. This workflow is flexible and can be tailored to another credentials or container registries.
@@ -225,7 +263,7 @@ jobs:
 
       - name: Push the image to Docker Hub
         run: |
-          docker push yourdockerhubusername/yourimagename:latest
+          docker push yourdockerhubusername/yourimagename:latest -> A [route].
 ```
 
 ### Detailed Workflow Steps:
@@ -268,13 +306,6 @@ If you're familiar with Docker and want to build and run the API manually, follo
 3. **Access the API**:
 
    Open [http://localhost:3000](http://localhost:3000) in your browser or use Postman to test the endpoints.
-
-4. **Stopping the Docker Containers**:
-   - You can stop the container by pressing **CTRL + C** in the terminal or using the following command:
-
-     ```bash
-     docker stop $(docker ps -q --filter ancestor=[route]:latest)
-     ```
 
    - You can also manage and stop containers using the Docker Desktop GUI.
 
