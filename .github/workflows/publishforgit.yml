@@ -20,12 +20,12 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Docker Image
-        run: docker build -t ghcr.io/CeciliaCode/monomap:${{ github.sha }} .
+        run: docker build -t ghcr.io/ceciliacode/monomap:${{ github.sha }} .
 
       - name: Tag Latest
-        run: docker tag ghcr.io/CeciliaCode/monomap:${{ github.sha }} ghcr.io/CeciliaCode/monomap:latest
+        run: docker tag ghcr.io/ceciliacode/monomap:${{ github.sha }} ghcr.io/ceciliacode/monomap:latest
 
       - name: Push Docker Image
         run: |
-          docker push ghcr.io/CeciliaCode/monomap:${{ github.sha }}
-          docker push ghcr.io/CeciliaCode/monomap:latest
+          docker push ghcr.io/ceciliacode/monomap:${{ github.sha }}
+          docker push ghcr.io/ceciliacode/monomap:latest
