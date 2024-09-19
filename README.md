@@ -1,3 +1,5 @@
+---
+
 # Monkeypox Case Management API
 
 ![Monomap](https://github.com/user-attachments/assets/8e4eafc6-13a2-4f80-b6e9-68873c92ec2d)
@@ -9,26 +11,22 @@ This project provides a fully functional RESTful API for managing Monkeypox case
 - [Features](#features)
 - [Used Technologies](#used-technologies)
 - [Prerequisites](#prerequisites)
-- [Quick Start: Non-Personalized Execution](#quick-start-non-personalized-execution)
-  - [Step 1: Clone the Repository](#step-1-clone-the-repository)
-  - [Step 2: Run the Application with Docker](#step-2-run-the-application-with-docker)
-  - [Step 3: Test the API Using Postman](#step-3-test-the-api-using-postman)
-  - [Postman Routes and Examples](#postman-routes-and-examples)
-  - [Testing MongoDB with MongoDB Compass](#testing-mongodb-with-mongodb-compass)
-- [Personalizing the Setup](#personalizing-the-setup)
+- [Setup and Basic, Quickstart Personalization](#setup-and-basic-quickstart-personalization)
   - [Step 1: Update Environment Variables](#step-1-update-environment-variables)
-  - [Step 2: Update Docker Compose File](#step-2-update-docker-compose-file)
-  - [Step 3: Personalize the Database Name](#step-3-personalize-the-database-name)
-- [CI/CD Pipeline](#ci/cd-pipeline)
-  - [GitHub Actions Workflow](#github-actions-workflow)
-  - [Steps](#steps)
-  - [GitHub Actions Secrets](#github-actions-secrets)
+  - [Step 2: Restart the Application](#step-2-restart-the-application)
+- [Running the Application](#running-the-application)
+- [Testing the API Using Postman](#testing-the-api-using-postman)
+- [CI/CD Pipeline personalization](#ci-cd-pipeline-personalization)
+  - [Step 1: Update Docker Compose File](#step-1-update-docker-compose-file)
+  - [Step 2: Personalize the Database Name](#step-2-personalize-the-database-name)
+  - [Step 3: Personalize the GitHub Actions Workflow](#step-3-personalize-the-github-actions-workflow)
 - [Running with Docker (Advanced)](#running-with-docker-advanced)
 - [Appendix: Creating Secrets and Access Tokens](#appendix-creating-secrets-and-access-tokens)
-  - [1. Creating Secrets in GitHub Repositories](#1-creating-secrets-in-github-repositories)
-  - [2. Creating Application Access Tokens for Gmail](#2-creating-application-access-tokens-for-gmail)
-  - [3. Creating Application Access Tokens in DockerHub](#3-creating-application-access-tokens-in-dockerhub)
+  - [1. Creating Application Access Tokens for Gmail](#1-creating-application-access-tokens-for-gmail)
+  - [2. Creating Application Access Tokens in DockerHub](#2-creating-application-access-tokens-in-dockerhub)
 - [Notes](#notes)
+
+---
 
 ## Features
 
@@ -37,9 +35,7 @@ This project provides a fully functional RESTful API for managing Monkeypox case
   - **Read**: Fetch all cases or filter based on criteria (e.g., cases from the last 7 days).
   - **Update**: Modify case details.
   - **Delete**: Remove case records.
-  
 - **Recent Cases Query**: Retrieve Monkeypox cases registered in the last week.
-  
 - **Dockerized**: The API runs inside a Docker container for easy testing and deployment.
 
 ## Used Technologies
@@ -54,46 +50,85 @@ This project provides a fully functional RESTful API for managing Monkeypox case
 ## Prerequisites
 
 - **Docker Desktop**: Make sure Docker Desktop is installed. You can download and install it from [here](https://www.docker.com/products/docker-desktop).
-- **MongoDB Compass**: You can install MongoDB Compass for a visual interface to interact with MongoDB. [Download MongoDB Compass](https://www.mongodb.com/try/download/compass).
-- **Node.js**: Ensure that Node.js is installed if you want to develop locally. [Download Node.js](https://nodejs.org/).
+- **MongoDB Compass**: Install MongoDB Compass for a visual interface to interact with MongoDB. [Download MongoDB Compass](https://www.mongodb.com/try/download/compass).
+- **Node.js**: Ensure Node.js is installed if you want to develop locally. [Download Node.js](https://nodejs.org/).
 - **Postman**: Install Postman to test the API endpoints. You can download it from [here](https://www.postman.com/downloads/).
 
----
-
-## Quick Start: Non-Personalized Execution
+## Setup and Basic, Quickstart Personalization
 
 ### Step 1: Clone the Repository
 
-```bash
-git clone https://github.com/yourusername/monomap.git
-cd monomap
-```
+   ```bash
+   git clone https://github.com/yourusername/monomap.git
+   cd monomap
+   ```
 
-### Step 2: Run the Application with Docker
+Before running the application, you must set up your environment variables in the `.env` file. This step is crucial to avoid errors during the execution of the application.
 
-Once Docker Desktop is installed and running, open the terminal inside the project directory (e.g., using Visual Studio Code's integrated terminal) and run:
+### Step 2: Update Environment Variables
 
-```bash
-docker-compose up
-```
+1. **Create the `.env` file based on the template**:
+   - The project includes a sample `.env.template` file that stores essential environment variables. You must fill in the required values before running the application.
 
-This command will build and start the API inside a Docker container.
+2. **Modify the following values with your own credentials**:
+   - `PORT`: Port for the application (e.g., `3000`).
+   - `MONGO_URL`: MongoDB connection string for local development.
+   - `MONGO_URL_DOCKER`: MongoDB connection string when running inside Docker.
+   - `MAIL_SECRET_KEY`: Your email service secret key, especially for Gmail (app-specific password).
+   - `MAIL_SERVICE`: The mail service you are using (e.g., Gmail).
+   - `MAIL_USER`: Your email address for sending notifications.
+   - `MAPBOX_ACCESS_TOKEN`: Your Mapbox access token for geolocation services.
 
-- **Stopping the Docker Containers**:
-  - To stop the running containers, press **CTRL + C** in the terminal where Docker is running.
-  - You can also stop and remove the containers with the following commands:
+   **Example `.env` file**:
+
+   ```plaintext
+   PORT=3000
+   MONGO_URL=mongodb://root:example@localhost:27017/
+   MONGO_URL_DOCKER=mongodb://root:example@mongo
+   MAIL_SECRET_KEY=your_secret_key_here
+   MAIL_SERVICE=gmail
+   MAIL_USER=your_email@example.com
+   MAPBOX_ACCESS_TOKEN=your_mapbox_token_here
+   ```
+
+3. **Save the `.env` file** and ensure all fields are correctly filled out.
+
+### Step 3: Restart the Application (if needed)
+
+After updating the environment variables, you need to restart the Docker containers to apply the changes:
+
+- Stop the running containers with:
+  ```bash
+  docker-compose down
+  ```
+- Start the containers again:
+  ```bash
+  docker-compose up
+  ```
+
+## Running the Application
+
+Once you have personalized your `.env` file and ensured Docker Desktop is running, you can:
+
+- **Run the Application with Docker**:
+
+   ```bash
+   docker-compose up
+   ```
+
+   This command will build and start the API inside a Docker container.
+
+- **Stop the Docker Containers**:
+  - To stop the running containers, press **CTRL + C** in the terminal.
+  - Alternatively, stop and remove the containers with:
 
     ```bash
     docker-compose down
     ```
 
-  - Alternatively, you can use the Docker Desktop GUI to manage and stop the containers visually.
+## Testing the API Using Postman
 
-### Step 3: Test the API Using Postman
-
-Once Docker is up and running, the API will be available at [http://localhost:3000](http://localhost:3000). You can test the API using Postman. Here are the routes and examples you can use for testing:
-
-### Postman Routes and Examples
+Once Docker is up and running, the API will be available at [http://localhost:3000](http://localhost:3000). You can test the API using Postman with the following routes:
 
 1. **Create a New Case**:
    - **Method**: `POST`
@@ -143,104 +178,26 @@ Once Docker is up and running, the API will be available at [http://localhost:30
 
 ### Testing MongoDB with MongoDB Compass
 
-You can use **MongoDB Compass** to visually inspect and interact with the database. Once Docker is running and MongoDB is started, follow these steps:
+You can use **MongoDB Compass** to visually inspect and interact with the database:
 
 1. **Open MongoDB Compass**.
-2. **Connect to MongoDB** by entering the following URL:
+2. **Connect to MongoDB** by entering:
 
    ```plaintext
    mongodb://root:example@localhost:27017/
    ```
 
-3. **Browse the data** and interact with the collections to visualize and query the Monkeypox case data.
+3. **Browse the data** and interact with the collections.
 
 ---
 
-## Personalizing the Setup
+## CI/CD Pipeline personalization
 
-If you want to personalize the project by using your own MongoDB, Mail service, and Mapbox token, follow these steps:
+The project uses GitHub Actions for CI/CD, automatically building and pushing Docker images to Docker Hub on every push to the main branch. This workflow is flexible and can be tailored to another credentials or container registries.
 
-### Step 1: Update Environment Variables
+**Make sure to update user and image routes (in lowercase)** within the GitHub Actions workflow files: `.github/workflows/publish.yml` for DockerHub and `.github/workflows/publishforgit.yml` for GitHub packages. Specifically, adjust the `build` and `push` steps as per your project needs. Additionally, ensure `GITHUB_TOKEN` has read & write permissions under **Settings > Actions > General** in your GitHub repository.
 
-1. **Open `.env` file**:
-   - The project includes a `.env` file that stores environment variables.
-   
-2. **Modify the following values with your own credentials**:
-   - `MONGO_URL`: MongoDB connection string.
-   - `MAIL_SECRET_KEY`: Your Gmail app password for email service.
-   - `MAIL_SERVICE`: The mail service you're using (e.g., Gmail, SendGrid).
-   - `MAIL_USER`: Your email address for sending notifications.
-   - `MAPBOX_ACCESS_TOKEN`: Your Mapbox access token for geolocation services.
-
-   **Example `.env` file**:
-
-   ```plaintext
-   PORT=3000
-   MONGO_URL=mongodb://<your-mongo-username>:<your-password>@localhost:27017/
-   MAIL_SECRET_KEY=<your-gmail-app-password>
-   MAIL_SERVICE=gmail
-   MAIL_USER=<your-email-address>
-   MAPBOX_ACCESS_TOKEN=<your-mapbox-token>
-   ```
-
-3. **Save the file** and restart the application using `docker-compose up` to apply the changes.
-
-### Step 2: Update Docker Compose File
-
-1. Open the `docker-compose.yml` file.
-2. Replace the default image (`ceciliasw/monomap:latest`) with your own Docker Hub username and image:
-
-   ```yaml
-   services:
-     monomap:
-       image: yourdockerhubusername/yourimagename:latest
-   ```
-
-3. Save the file and re-run `docker-compose up` to apply these changes.
-
-### Step 3: Personalize the Database Name
-
-1. Open the `App.ts` file (or `index.ts`, depending on your structure).
-2. Look for the following code in the `App.ts` file:
-
-   ```typescript
-   import express from 'express';
-   import 'dotenv/config';
-   import { envs } from './config/envs.plugin';
-   import { MongoDatabase } from './data/init';
-   import { AppRoutes } from './controllers/routes';
-   import { emailJob } from './domain/jobs/email.job';
-
-   const app = express();
-   app.use(express.json());
-   app.use(AppRoutes.routes);
-
-   (async () => {
-     await MongoDatabase.connect({ mongoUrl: envs.MONGO_URL ?? "", dbName: "MonoMap" });  // Change "MonoMap" here
-   })();
-
-   app.listen(envs.PORT, () => {
-     console.log("Server started.");
-     emailJob();
-   });
-   ```
-
-3. **Update the `dbName`** from `"MonoMap"` to the name you want for your database.
-
-4. Save the file and restart the app using Docker.
-
----
-
-## CI/CD Pipeline
-
-The project uses GitHub Actions for CI/CD, automatically building and pushing Docker images to Docker Hub on every push to the `main` branch.
-
-### GitHub Actions Workflow
-
-Make sure you update user and image names (lowercase) in the GitHub Actions workflow files `.github/workflows/publish.yml` (logged user is DockerHub's), and `.github/workflows/publishforgit.yml` for packages (logged user is GitHub's), specifically in the `build` and `push` steps.
-`GITHUB_TOKEN` is automatically generated, and must have read & write permissions from the repository's route: **Settings > Actions > General**.
-
-### Example:
+### Example Workflow Configuration:
 
 ```yaml
 name: Docker Build & Publish
@@ -254,31 +211,36 @@ jobs:
   build-and-push:
     runs-on: ubuntu-latest
     steps:
-      - name: Clone code
+      - name: Clone repository using GitHub Actions
         uses: actions/checkout@v3
       
-      - name: Login to Docker Hub  
+      - name: Log in to Docker Hub  
         run: echo "${{ secrets.DOCKER_PAT }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Build Docker Image
+      - name: Build Docker Image and tag it with both the commit SHA and latest
         run: docker build -t yourdockerhubusername/yourimagename:latest .
 
       - name: Tag Latest
         run: docker tag yourdockerhubusername/yourimagename:latest yourdockerhubusername/yourimagename:latest
 
-      - name: Push Docker Image
+      - name: Push the image to Docker Hub
         run: |
           docker push yourdockerhubusername/yourimagename:latest
 ```
 
-### Steps
+### Detailed Workflow Steps:
 
+1. **Clone repository using GitHub Actions**:
+   - This step uses the `actions/checkout@v3` action to clone your repository into the workflow environment, ensuring the latest code is ready for the build process.
 
+2. **Log in to Docker Hub using credentials stored in GitHub Secrets (`DOCKER_USERNAME` and `DOCKER_PAT`)**:
+   - This step securely logs into Docker Hub using the credentials stored in GitHub Secrets. Make sure you have added these secrets in your GitHub repository settings under **Settings > Secrets and variables > Actions**.
 
-1. **Clone repository using GitHub Actions**.
-2. **Log in to Docker Hub** using credentials stored in GitHub Secrets (`DOCKER_USERNAME` and `DOCKER_PAT`).
-3. **Build Docker image** and tag it with both the commit SHA and `latest`.
-4. **Push the image** to Docker Hub.
+3. **Build Docker image and tag it with both the commit SHA and `latest`**:
+   - This step builds the Docker image from the Dockerfile and tags it twice: once with the commit SHA (for version tracking) and once as `latest`.
+
+4. **Push the image to Docker Hub**:
+   - This final step pushes the tagged Docker images to your Docker Hub repository, making them available for deployment.
 
 ### GitHub Actions Secrets
 
@@ -287,20 +249,20 @@ jobs:
 
 ---
 
-## Running with Docker (Advanced)
+### Running with Docker (Advanced)
 
-If you're familiar with Docker and want to build and run the API manually:
+If you're familiar with Docker and want to build and run the API manually, follow these steps:
 
 1. **Build Docker image**:
 
    ```bash
-   docker build -t yourdockerhubusername/yourimagename:latest .
+   docker build -t [route]:latest
    ```
 
 2. **Run Docker container**:
 
    ```bash
-   docker run -p 3000:3000 yourdockerhubusername/yourimagename:latest
+   docker run -p 3000:3000 [route]:latest
    ```
 
 3. **Access the API**:
@@ -311,7 +273,7 @@ If you're familiar with Docker and want to build and run the API manually:
    - You can stop the container by pressing **CTRL + C** in the terminal or using the following command:
 
      ```bash
-     docker stop $(docker ps -q --filter ancestor=yourdockerhubusername/yourimagename:latest)
+     docker stop $(docker ps -q --filter ancestor=[route]:latest)
      ```
 
    - You can also manage and stop containers using the Docker Desktop GUI.
@@ -320,25 +282,9 @@ If you're familiar with Docker and want to build and run the API manually:
 
 ## Appendix: Creating Secrets and Access Tokens
 
-### 1. Creating Secrets in GitHub Repositories
+Follow these steps to securely store secrets such as API keys and access tokens:
 
-GitHub secrets are used to store sensitive information (like API keys or access tokens) securely in your repository. Here's how to create secrets in GitHub:
-
-#### Step-by-Step:
-
-1. **Go to your GitHub repository**.
-2. Click on the **Settings** tab.
-3. On the left-hand menu, click on **Secrets and variables** and then select **Actions**.
-4. Click the **New repository secret** button.
-5. Enter the name of the secret, for example, `DOCKER_USERNAME` or `DOCKER_PAT`.
-6. Paste the sensitive value (e.g., token or password) in the **Value** field.
-7. Click **Add secret**.
-
-Now, the secret can be accessed within your GitHub Actions workflows using the format `${{ secrets.SECRET_NAME }}`.
-
----
-
-### 2. Creating Application Access Tokens for Gmail
+### 1. Creating Application Access Tokens for Gmail
 
 To use Gmail for sending emails from your API, you need to create an **App Password** (a secure way for Gmail API access when two-factor authentication is enabled).
 
@@ -354,7 +300,7 @@ To use Gmail for sending emails from your API, you need to create an **App Passw
 
 ---
 
-### 3. Creating Application Access Tokens in DockerHub
+### 2. Creating Application Access Tokens in DockerHub
 
 DockerHub tokens are used to authenticate and push Docker images programmatically without exposing your Docker password. You need to provide **Read, Write, and Delete** permissions to the token.
 
@@ -369,21 +315,14 @@ DockerHub tokens are used to authenticate and push Docker images programmaticall
 7. Click **Generate**.
 8. Copy the token and store it in your GitHub repository secrets as `DOCKER_PAT`.
 
+---
 
 ## Notes
 
----
+**First note**: The quickstart will make e-mail sending and CRUD operations functional, should a previously created database with matching names (unless personalized) exist, or the code shall automatically generate it; but the GitHub workflow won't be triggered if the repository, and routes are not updated.
 
-**First note**: The quick, unpersonalized start will make the CRUD operations functional, should a previously created database with matching names exist, or the code shall automatically generate it; but the GitHub workflow won't be triggered if a repository is not created, nor will the sent emails be accessible unless the application is personalized, especially by configuring the `.env` variables:
+**Second note**: This reusable project for any disease has the potential to be further improved by incorporating additional parameters into the model, such as symptoms, hospital classification, or blood type, which would enhance its utility for research. Additionally, creating a frontend GUI or a dashboard to analyze and visualize infection trends could provide valuable insights. An extra feature to resend emails when a case is updated can also be implemented, perfecting notification processes and case monitoring.
 
-- `MAIL_SECRET_KEY=`
-- `MAIL_SERVICE=`
-- `MAIL_USER=`
+**Third note**: Console logs, error messages, and the HTML e-mail template include Spanish writing.
 
 ---
-
-**Second note**: This reusable project for any disease has the potential to be further improved by incorporating additional parameters into the model, such as symptoms, hospital classification, or blood type, which would enhance its utility for research. Additionally, creating a frontend GUI, or a dashboard to analyze and visualize infection trends could provide valuable insights. An extra feature to resend emails when a case is updated can also be implemented, perfectionating notification processes and case monitoring.
-
----
-
-**Third note**: Console logs, error messages, and the HTML e-mail template include spanish writing.
