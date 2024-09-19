@@ -17,7 +17,7 @@ This project provides a fully functional RESTful API for managing Monkeypox case
   - [Step 1: Update Environment Variables](#step-1-update-environment-variables)
   - [Step 2: Update Docker Compose File](#step-2-update-docker-compose-file)
   - [Step 3: Personalize the Database Name](#step-3-personalize-the-database-name)
-- [CI/CD Pipeline](#ci-cd-pipeline)
+- [CI/CD Pipeline](#ci/cd-pipeline)
   - [GitHub Actions Workflow](#github-actions-workflow)
   - [Steps](#steps)
   - [GitHub Actions Secrets](#github-actions-secrets)
