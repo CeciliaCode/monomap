@@ -218,9 +218,16 @@ Once Docker is up and running, the API will be available at [http://localhost:30
 
 ## CI/CD Pipeline personalization
 
-The project uses GitHub Actions for CI/CD, automatically building and pushing Docker images to Docker Hub on every push to the main branch. This workflow is flexible and can be tailored to another credentials, dockerfile or container registries.
+The project uses GitHub Actions for CI/CD, automatically building and pushing Docker images to Docker Hub on every push to the main branch. This workflow is flexible and can be tailored to another credentials, docker-compose files or container registries.
 
-**Make sure to update user and image routes (in lowercase)** within the GitHub Actions workflow files: `.github/workflows/publish.yml` for DockerHub and `.github/workflows/publishforgit.yml` for GitHub packages. Specifically, adjust the `build` and `push` steps as per your project needs. Additionally, ensure `GITHUB_TOKEN` has read & write permissions under **Settings > Actions > General** in your GitHub repository.
+**Docker-compose.yml:**
+```yaml
+services:
+  monomap:
+    image: ceciliasw/monomap:latest -> Replace.
+```
+
+**Make sure to update user and image routes (in lowercase)** within the docker-compose, and GitHub Actions workflow files: `.github/workflows/publish.yml` for DockerHub and `.github/workflows/publishforgit.yml` for GitHub packages. Specifically, adjust the `build` and `push` steps as per your project needs. Additionally, ensure `GITHUB_TOKEN` has read & write permissions under **Settings > Actions > General** in your GitHub repository.
 
 ### Example Workflow Configuration:
 
