@@ -26,7 +26,7 @@ This project provides a fully functional RESTful API for managing Monkeypox case
   - [1. Creating Secrets in GitHub Repositories](#1-creating-secrets-in-github-repositories)
   - [2. Creating Application Access Tokens for Gmail](#2-creating-application-access-tokens-for-gmail)
   - [3. Creating Application Access Tokens in DockerHub](#3-creating-application-access-tokens-in-dockerhub)
-- [Notes](#note)
+- [Notes](#notes)
 
 ## Features
 
@@ -366,9 +366,12 @@ DockerHub tokens are used to authenticate and push Docker images programmaticall
 7. Click **Generate**.
 8. Copy the token and store it in your GitHub repository secrets as `DOCKER_PAT`.
 
+
+## Notes
+
 ---
 
-**Note**: The quick, unpersonalized start will make the CRUD operations functional, should a previously created database with matching names exist, or the code shall automatically generate it; but the GitHub workflow won't be triggered if a repository is not created, nor will the sent emails be accessible unless the application is personalized, especially by configuring the `.env` variables:
+**First note**: The quick, unpersonalized start will make the CRUD operations functional, should a previously created database with matching names exist, or the code shall automatically generate it; but the GitHub workflow won't be triggered if a repository is not created, nor will the sent emails be accessible unless the application is personalized, especially by configuring the `.env` variables:
 
 - `MAIL_SECRET_KEY=`
 - `MAIL_SERVICE=`
