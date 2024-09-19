@@ -337,7 +337,7 @@ DockerHub tokens are used to authenticate and push Docker images programmaticall
 
 ## Notes
 
-**First note**: The quickstart will make e-mail sending and CRUD operations functional, should a previously created database with matching names (unless personalized) exist, or the code shall automatically generate it; but the GitHub workflow won't be triggered if the cloned repository, and routes are not updated withing the .yml files.
+**First note**: The quickstart will make e-mail sending and CRUD operations functional, should a previously created database with matching names (unless personalized) exist, or the code shall automatically generate it; but the GitHub workflow won't be triggered if the cloned repository, and routes are not updated within the .yml files.
 
 **Second note**: This reusable project for any disease has the potential to be further improved by incorporating additional parameters into the model, such as symptoms, hospital classification, or blood type, which would enhance its utility for research. Additionally, creating a frontend GUI or a dashboard to analyze and visualize infection trends could provide valuable insights. An extra feature to resend emails when a case is updated can also be implemented, perfecting notification processes and case monitoring.
 
