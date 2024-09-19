@@ -181,20 +181,7 @@ Once Docker is up and running, the API will be available at [http://localhost:30
 6. **Get Cases from the Last Week**:
    - **Method**: `GET`
    - **URL**: `http://localhost:3000/cases/last`
-
-### Testing MongoDB with MongoDB Compass
-
-You can use **MongoDB Compass** to visually inspect and interact with the database:
-
-1. **Open MongoDB Compass**.
-2. **Connect to MongoDB** by entering:
-
-   ```plaintext
-   mongodb://root:example@localhost:27017/
-   ```
-
-3. **Browse the data** and interact with the collections.
-
+     
 ---
 
 ## Testing MongoDB with MongoDB Compass
