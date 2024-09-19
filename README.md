@@ -235,7 +235,7 @@ The project uses GitHub Actions for CI/CD, automatically building and pushing Do
 
 ### GitHub Actions Workflow
 
-Make sure you update the image name in the GitHub Actions workflow file `.github/workflows/publish.yml` or `.github/workflows/publishforgit.yml` for packages, specifically in the `build` and `push` steps.
+Make sure you update user and image names in the GitHub Actions workflow files `.github/workflows/publish.yml` (logged user is DockerHub's), and `.github/workflows/publishforgit.yml` for packages (logged user is GitHub's), specifically in the `build` and `push` steps.
 `GITHUB_TOKEN` is automatically generated, and must have read & write permissions from the repository's route: **Settings > Actions > General**.
 
 ### Example:
