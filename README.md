@@ -1,5 +1,7 @@
 # Monkeypox Case Management API
 
+![Monomap](https://github.com/user-attachments/assets/8e4eafc6-13a2-4f80-b6e9-68873c92ec2d)
+
 This project provides a fully functional RESTful API for managing Monkeypox cases. It supports full CRUD operations for creating, reading, updating, and deleting case records, as well as querying cases from the last 7 days. The API is containerized using Docker for easy setup and deployment.
 
 ## Table of Contents
