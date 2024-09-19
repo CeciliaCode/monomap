@@ -383,4 +383,4 @@ DockerHub tokens are used to authenticate and push Docker images programmaticall
 
 ---
 
-**Third note**: Console logs, error messages, and the HTML e-mail template includes spanish writing.
+**Third note**: Console logs, error messages, and the HTML e-mail template include spanish writing.
