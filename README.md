@@ -2,6 +2,32 @@
 
 This project provides a fully functional RESTful API for managing Monkeypox cases. It supports full CRUD operations for creating, reading, updating, and deleting case records, as well as querying cases from the last 7 days. The API is containerized using Docker for easy setup and deployment.
 
+## Table of Contents
+
+- [Features](#features)
+- [Used Technologies](#used-technologies)
+- [Prerequisites](#prerequisites)
+- [Quick Start: Non-Personalized Execution](#quick-start-non-personalized-execution)
+  - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+  - [Step 2: Run the Application with Docker](#step-2-run-the-application-with-docker)
+  - [Step 3: Test the API Using Postman](#step-3-test-the-api-using-postman)
+  - [Postman Routes and Examples](#postman-routes-and-examples)
+  - [Testing MongoDB with MongoDB Compass](#testing-mongodb-with-mongodb-compass)
+- [Personalizing the Setup](#personalizing-the-setup)
+  - [Step 1: Update Environment Variables](#step-1-update-environment-variables)
+  - [Step 2: Update Docker Compose File](#step-2-update-docker-compose-file)
+  - [Step 3: Personalize the Database Name](#step-3-personalize-the-database-name)
+- [CI/CD Pipeline](#ci-cd-pipeline)
+  - [GitHub Actions Workflow](#github-actions-workflow)
+  - [Steps](#steps)
+  - [GitHub Actions Secrets](#github-actions-secrets)
+- [Running with Docker (Advanced)](#running-with-docker-advanced)
+- [Appendix: Creating Secrets and Access Tokens](#appendix-creating-secrets-and-access-tokens)
+  - [1. Creating Secrets in GitHub Repositories](#1-creating-secrets-in-github-repositories)
+  - [2. Creating Application Access Tokens for Gmail](#2-creating-application-access-tokens-for-gmail)
+  - [3. Creating Application Access Tokens in DockerHub](#3-creating-application-access-tokens-in-dockerhub)
+- [Notes](#note)
+
 ## Features
 
 - **CRUD Operations**:
@@ -351,3 +377,7 @@ DockerHub tokens are used to authenticate and push Docker images programmaticall
 ---
 
 **Second note**: This reusable project for any disease has the potential to be further improved by incorporating additional parameters into the model, such as symptoms, hospital classification, or blood type, which would enhance its utility for research. Additionally, creating a frontend GUI, or a dashboard to analyze and visualize infection trends could provide valuable insights. An extra feature to resend emails when a case is updated can also be implemented, perfectionating notification processes and case monitoring.
+
+---
+
+**Third note**: Console logs, error messages, and the HTML e-mail template includes spanish writing.
