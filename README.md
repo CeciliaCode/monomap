@@ -301,7 +301,9 @@ If you're familiar with Docker and want to build and run the API manually, follo
 
    Open [http://localhost:3000](http://localhost:3000) in your browser or use Postman to test the endpoints.
 
-   - You can also manage and stop containers using the Docker Desktop GUI.
+   - You can also manage and stop containers using the Docker Desktop GUI; or pull the image from **GitHub Packages Registry** for further handling.
+    ![imagen](https://github.com/user-attachments/assets/4b8b6bff-32df-4401-b23c-5e32ab10fc89)
+
 
 ---
 
