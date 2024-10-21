@@ -175,7 +175,7 @@ Once Docker is up and running, the API will be available at [http://localhost:30
 
 5. **Delete a Case**:
    - **Method**: `DELETE`
-   - **URL**: `http://localhost:3000/cases/:id`
+   - **URL**: `http://localhost:3000/api/cases/:id`
    - Replace `:id` with the actual case ID you want to delete.
 
 6. **Get Cases from the Last Week**:
