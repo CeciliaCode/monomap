@@ -138,7 +138,7 @@ Once Docker is up and running, the API will be available at [http://localhost:30
 
 1. **Create a New Case**:
    - **Method**: `POST`
-   - **URL**: `http://localhost:3000/cases`
+   - **URL**: `http://localhost:3000/api/cases`
    - **Body**: (raw JSON)
 
      ```json
@@ -152,16 +152,16 @@ Once Docker is up and running, the API will be available at [http://localhost:30
 
 2. **Get All Cases**:
    - **Method**: `GET`
-   - **URL**: `http://localhost:3000/cases`
+   - **URL**: `http://localhost:3000/api/cases`
 
 3. **Get a Case by ID**:
    - **Method**: `GET`
-   - **URL**: `http://localhost:3000/cases/:id`
+   - **URL**: `http://localhost:3000/api/cases/:id`
    - Replace `:id` with the actual case ID you want to fetch.
 
 4. **Update a Case**:
    - **Method**: `PUT`
-   - **URL**: `http://localhost:3000/cases/:id`
+   - **URL**: `http://localhost:3000/api/cases/:id`
    - **Body**: (raw JSON)
 
      ```json
@@ -180,7 +180,7 @@ Once Docker is up and running, the API will be available at [http://localhost:30
 
 6. **Get Cases from the Last Week**:
    - **Method**: `GET`
-   - **URL**: `http://localhost:3000/cases/last`
+   - **URL**: `http://localhost:3000/api/cases/last`
      
 ---
 
