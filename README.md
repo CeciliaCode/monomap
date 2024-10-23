@@ -10,6 +10,7 @@ This project provides a fully functional RESTful API for managing Monkeypox case
 
 - [Features](#features)
 - [Used Technologies](#used-technologies)
+- [Overview](#overview)
 - [Prerequisites](#prerequisites)
 - [Setup and Basic, Quickstart Personalization](#setup-and-basic-quickstart-personalization)
   - [Step 1: Update Environment Variables](#step-1-update-environment-variables)
@@ -47,6 +48,76 @@ This project provides a fully functional RESTful API for managing Monkeypox case
 - **MongoDB**: Database for storing case data, including geolocation and patient details.
 - **Node.js**: Backend for the API.
 - **TypeScript**: Provides type safety and code quality for better development.
+
+## Overview
+
+**Here is an explanation of the file structure within this project, detailing the purpose of each folder and file.**
+
+```
+.github/
+└── workflows/
+    ├── publish.yml
+    ├── publishforgit.yml
+src/
+├── config/
+│   └── envs.plugin.ts
+├── controllers/
+│   └── cases/
+│       └── routes.ts
+├── data/
+│   ├── models/
+│   │   └── init.ts
+├── domain/
+│   ├── jobs/
+│   │   └── email.job.ts
+│   ├── services/
+│   │   └── email.service.ts
+│   ├── templates/
+│   │   └── email.template.ts
+├── app.ts
+├── .dockerignore
+├── .env.template
+├── .gitignore
+├── Dockerfile
+├── LICENSE
+├── README.md
+├── docker-compose.yml
+├── package-lock.json
+├── package.json
+└── tsconfig.json
+```
+
+#### **`.github/workflows/`**
+- **publish.yml**: GitHub Actions workflow for building and pushing Docker images to DockerHub. This file automates the process of creating Docker images and publishing them to a registry when changes are pushed to the repository.
+- **publishforgit.yml**: Similar to `publish.yml`, but designed for publishing Docker images to GitHub Packages instead of DockerHub.
+
+#### **`src/`**
+- **`config/`**:
+  - **envs.plugin.ts**: Contains environment variable configurations that are injected into the application at runtime.
+  
+- **`controllers/`**:
+  - **cases/routes.ts**: Handles routing for the Monkeypox case management API. This file defines the endpoints for creating, updating, reading, and deleting cases.
+
+- **`data/`**:
+  - **models/init.ts**: Defines and initializes the MongoDB models (schemas) that the API uses for storing Monkeypox case data.
+
+- **`domain/`**:
+  - **jobs/email.job.ts**: Defines scheduled jobs for sending email notifications, which can be used for alerts and case status updates.
+  - **services/email.service.ts**: Provides the functionality for sending emails. This service interacts with an email provider (e.g., Gmail) and uses the email template.
+  - **templates/email.template.ts**: Defines the email template used when sending notifications to users. The template can be customized to include dynamic content like case details.
+
+#### **Root Files**:
+- **app.ts**: The entry point of the application, initializing the Express server, loading middleware, and setting up the API routes.
+- **.dockerignore**: Specifies files and directories that should be ignored when building the Docker image. Similar to `.gitignore` but specific to Docker.
+- **.env.template**: A template environment file providing placeholders for all required environment variables (such as MongoDB URL, email credentials, and API keys).
+- **.gitignore**: Specifies files and directories to be ignored by Git during version control, preventing sensitive or unnecessary files from being committed.
+- **Dockerfile**: Defines the instructions to build a Docker image for the project. This includes specifying the base image, installing dependencies, and setting up the application environment.
+- **LICENSE**: Contains the legal license information for the project, outlining the permissions and restrictions for using the software.
+- **README.md**: The documentation for the project, including setup instructions, usage, and API details.
+- **docker-compose.yml**: A Docker Compose configuration file that orchestrates the services needed to run the application (e.g., the API and MongoDB database).
+- **package-lock.json**: Automatically generated file that locks the dependencies for the project to specific versions, ensuring consistency across different environments.
+- **package.json**: Lists the project dependencies and scripts used by Node.js. It also defines metadata for the project, like its name, version, and entry points.
+- **tsconfig.json**: Configuration file for TypeScript, specifying compiler options and the structure of the TypeScript project.
 
 ## Prerequisites
 
